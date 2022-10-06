@@ -13,6 +13,10 @@ def get_files() -> list[str]:
     return next(os.walk(FILE_CONFIG['path']), (None, None, []))[2]
 
 
+def _file_path(f):
+    return FILE_CONFIG['path'] + f"/{f}"
+
+
 def get_files_data(
         files: list[str],
         skip_files: list[str] = None
@@ -22,7 +26,7 @@ def get_files_data(
 
     for f in files:
         if f not in skip_files:
-            return f, open(FILE_CONFIG['path'] + f"/{f}", 'rb')
+            return f, open(_file_path(f), 'rb')
 
 
 async def get_file_text(
@@ -33,7 +37,7 @@ async def get_file_text(
         bot_log.warning('Not found files in directory!')
         return
 
-    if files.__len__() == skip_files.__len__():
+    if files.sort() == skip_files.sort():
         if not settings['repeat']['value']:
             bot_log.warning('There are no more files for users!')
             return
@@ -53,7 +57,7 @@ async def get_file_text(
 async def add_file(file_name: str, content: bytes):
     Path(FILE_CONFIG['path']).mkdir(parents=True, exist_ok=True)
 
-    with open(FILE_CONFIG['path'] + f'/{file_name}', 'wb') as f:
+    with open(_file_path(file_name), 'wb') as f:
         f.write(content)
 
 
@@ -79,4 +83,4 @@ def get_files_dict():
 
 def delete_file(file_name):
     if file_name in get_files():
-        os.remove(FILE_CONFIG['path'] + f'/{file_name}')
+        os.remove(_file_path(file_name))
