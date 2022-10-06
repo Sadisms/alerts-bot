@@ -56,7 +56,7 @@ async def get_files(message: types.Message, state: FSMContext):
 async def delete_file_start(callback_query: types.CallbackQuery):
     await callback_query.message.delete()
 
-    if file_table := get_files_answer():
+    if file_table := await get_files_answer():
         await callback_query.message.answer(
             text=f'Файлы:\n{file_table}',
             parse_mode='HTML'

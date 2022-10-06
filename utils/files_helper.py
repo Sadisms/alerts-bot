@@ -4,7 +4,7 @@ from pathlib import Path
 from prettytable import PrettyTable
 
 from data.config import FILE_CONFIG
-from utils.dbworker import reset_repeat, get_settings
+from utils.dbworker import reset_repeat, get_settings, get_files_sending
 from utils.logging import bot_log
 
 
@@ -57,12 +57,13 @@ async def add_file(file_name: str, content: bytes):
         f.write(content)
 
 
-def get_files_answer():
+async def get_files_answer():
     if files := get_files():
+        sent_files = await get_files_sending()
         table = PrettyTable()
-        table.field_names = ["ID", "FILE NAME"]
+        table.field_names = ["ID", "FILE NAME", "SENT"]
         for i, f in enumerate(files):
-            table.add_row([i+1, f])
+            table.add_row([i+1, f, f in sent_files])
 
         return f"<pre>{table.__str__()}</pre>"
 
