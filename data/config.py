@@ -18,3 +18,9 @@ BOT_CONFIG = {
 FILE_CONFIG = {
     'path': env.str('FILE_PATH'),
 }
+
+
+PYROGRAM_CONFIG = {
+    'api_id': env.str('API_ID'),
+    'api_hash': env.str('API_HASH'),
+}
