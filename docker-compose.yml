@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  bot:
+    image: alerts-bot:latest
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/alerts-bot
+    command: python3 app.py
+    network_mode: host

@@ -1,0 +1,1 @@
+peewee-moves @ git+https://github.com/Sadisms/peewee-moves.git
