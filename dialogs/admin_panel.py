@@ -40,6 +40,11 @@ async def settings_dialog():
             Window(
                 Const("Настройки:"),
                 *window_settings,
+                Button(
+                    Const("Закрыть меню"),
+                    id='delete',
+                    on_click='delete'
+                ),
                 state=StatesAP.start
             ),
             Window(

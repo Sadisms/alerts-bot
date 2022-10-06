@@ -10,24 +10,16 @@ async def init_tables():
 
 
 @conn.atomic()
-async def _get_user(user_id: int) -> Users:
-    return Users.get_or_create(user_id=user_id)[0]
-
-
-@conn.atomic()
 async def add_user(
         user_id: int,
         file_name: str,
         repeat: bool = True
 ) -> None:
-    await _get_user(user_id)
-
-    Users.update(
+    Users.create(
+        user_id=user_id,
         file=file_name,
         repeat=repeat
-    ).where(
-        Users.user_id == user_id
-    ).execute()
+    )
 
 
 @conn.atomic()
