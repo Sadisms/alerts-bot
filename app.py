@@ -1,11 +1,8 @@
-from threading import Thread, Event
-
 from aiogram.utils import executor
 
 import loader
 import handlers  # noqa
 from dialogs.admin_panel import settings_dialog
-from loader import pyrogram_client
 
 from utils.logging import bot_log
 from utils.tg_helper import set_default_commands
