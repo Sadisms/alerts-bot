@@ -30,6 +30,7 @@ docker-compose run oauth python3 oauth_tg.py
 ### Запуск бота
 
 ```shell
+python .\migrator.py migrate
 python .\app.py
 ```
 
